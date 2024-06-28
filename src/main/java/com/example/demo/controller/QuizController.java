@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 import com.example.demo.model.Question;
-import com.example.demo.model.Quiz;
+import com.example.demo.model.StudentQuiz;
 import com.example.demo.model.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,28 +18,28 @@ public class QuizController {
     private QuizService quizService;
 
     @Autowired
-    private Quiz quiz;
+    private StudentQuiz studentQuiz;
 
     //I need this to redirect properly into the appropriate links
     @GetMapping("/quiz")
     public String showQuiz(Model model) {
         List <Question> questions = quizService.getShuffledQuestions();
-        quiz.setQuestions(questions);
+        studentQuiz.setQuestions(questions);
         model.addAttribute("questions", questions);
         return "quiz";
     }
 
     @PostMapping("/submitQuiz")
     public String submitQuiz(@RequestParam List<String> answers, Model model) {
-        int score = quizService.calculateScore(quiz.getQuestions(), answers);
-        quiz.setScore(score);
+        int score = quizService.calculateScore(studentQuiz.getQuestions(), answers);
+        studentQuiz.setScore(score);
         return "redirect:/grades";
     }
 
     @GetMapping("/grades")
     public String showGrades(Model model) {
-        model.addAttribute("score", quiz.getScore());
-        model.addAttribute("questions", quiz.getQuestions());
+        model.addAttribute("score", studentQuiz.getScore());
+        model.addAttribute("questions", studentQuiz.getQuestions());
         return "grades";
     }
 

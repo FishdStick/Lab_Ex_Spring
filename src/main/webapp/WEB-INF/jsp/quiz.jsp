@@ -7,17 +7,26 @@
 </head>
 <body>
 
-<form action="/submitQuiz" method="post">
-    <div th:each="question, stat : ${questions}">
-        <p th:text="${#numbers.formatInteger(stat.index + 1)} + '. ' + ${question.text}"></p>
-        <ul>
-            <li th:each="option : ${question.options}">
-                <input type="radio" th:name="'answers[' + ${stat.index} + ']'" th:value="${option}"> <span th:text="${option}"></span><br>
-            </li>
-        </ul>
-    </div>
-    <button type="submit">Submit</button>
-</form>
+<c:if test="${not empty questions}">
+    <form action="submitQuiz" method="post">
+        <c:forEach var="question" items="${questions}" varStatus="status">
+            <div>
+                <h3>Question ${status.index + 1}: ${question.text}</h3>
+                <c:forEach var="answer" items="${question.answers}">
+                    <div>
+                        <input type="radio" name="question${status.index}" value="${answer}">
+                        <label>${answer}</label>
+                    </div>
+                </c:forEach>
+            </div>
+        </c:forEach>
+        <input type="submit" value="Submit Quiz">
+    </form>
+</c:if>
+
+<c:if test="${empty questions}">
+    <p>No questions available.</p>
+</c:if>
 
 </body>
 </html>

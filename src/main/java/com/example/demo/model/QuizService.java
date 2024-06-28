@@ -9,10 +9,8 @@ import java.util.List;
 @Service
 public class QuizService {
 
-    private List<Question> questions;
-
     public List<Question> getShuffledQuestions(){
-        questions = new ArrayList<>();
+        ArrayList<Question> questions = new ArrayList<>();
 
         questions.add(new Question("Who delivered the Gettysburg Address?",
                 Arrays.asList("Abraham Lincoln", "George Washington", "Paul Revere", "Joseph Smith"),
