@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,26 +8,19 @@
 </head>
 <body>
 
-<c:if test="${not empty questions}">
-    <form action="submitQuiz" method="post">
-        <c:forEach var="question" items="${questions}" varStatus="status">
-            <div>
-                <h3>Question ${status.index + 1}: ${question.text}</h3>
-                <c:forEach var="answer" items="${question.answers}">
-                    <div>
-                        <input type="radio" name="question${status.index}" value="${answer}">
-                        <label>${answer}</label>
-                    </div>
-                </c:forEach>
+<form action="submitQuiz" method="post">
+    <c:forEach var="question" items="${questions}">
+        <h3>${question.questionText}</h3>
+        <c:forEach var="choice" items="${question.choices}">
+            <div class="choice">
+                <input type="radio" id="${question.questionText}" name="${question.questionText}" value="${choice}" />
+                <label for="${question.questionText}">${choice}</label>
             </div>
         </c:forEach>
-        <input type="submit" value="Submit Quiz">
-    </form>
-</c:if>
-
-<c:if test="${empty questions}">
-    <p>No questions available.</p>
-</c:if>
+        <br/>
+    </c:forEach>
+    <input type="submit" value="Submit Answers"/>
+</form>
 
 </body>
 </html>

@@ -32,8 +32,10 @@ public class QuizService {
                 Arrays.asList("Feathers", "Aluminum", "Steel", "Titanium"),
                 "Steel"));
 
+        for (Question question : questions) {
+            Collections.shuffle(question.getChoices());
+        }
         Collections.shuffle(questions);
-        questions.forEach(question -> Collections.shuffle(question.getChoices()));
 
         return questions;
     }

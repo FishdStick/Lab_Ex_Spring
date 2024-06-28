@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.UserSession;
+import com.example.demo.model.UserSessionModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ public class LoginController {
     private UserCredentials userCredentials;
 
     @Autowired
-    private UserSession userSession;
+    private UserSessionModel userSessionModel;
 
     @GetMapping("/login")
     public String showLoginForm() {
@@ -25,16 +25,16 @@ public class LoginController {
     //Check if Session Exists
     @GetMapping("/")
     public String home(Model model) {
-        if(userSession.getUsername()==null) return "redirect:/login";
-        model.addAttribute("userSession", userSession);
+        if(userSessionModel.getUsername()==null) return "redirect:/login";
+        model.addAttribute("userSession", userSessionModel);
         return "home";
     }
     //Form Validation
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password, Model model) {
         if (userCredentials.validateUser(username, password)) {
-            userSession.setUsername(username);
-            model.addAttribute("userSession", userSession);
+            userSessionModel.setUsername(username);
+            model.addAttribute("userSession", userSessionModel);
             return "redirect:/";
         } else {
             model.addAttribute("message", "Invalid username or password.");
@@ -44,7 +44,7 @@ public class LoginController {
 
     @GetMapping("/logout")
     public String logout() {
-        userSession.setUsername(null);
+        userSessionModel.setUsername(null);
         return "redirect:/login";
     }
 

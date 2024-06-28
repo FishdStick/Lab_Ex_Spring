@@ -3,14 +3,14 @@ package com.example.demo.model;
 import org.springframework.stereotype.Component;
 
 @Component
-public class User {
+public class UserModel {
 
     private String username;
     private String password;
 
-    public User() {}
+    public UserModel() {}
 
-    public User(String username, String password) {
+    public UserModel(String username, String password) {
         this.username = username;
         this.password = password;
     }

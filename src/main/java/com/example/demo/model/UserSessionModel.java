@@ -5,12 +5,12 @@ import org.springframework.web.context.annotation.SessionScope;
 
 @Component
 @SessionScope
-public class UserSession {
+public class UserSessionModel {
     private String username;
 
-    public UserSession(){}
+    public UserSessionModel(){}
 
-    public UserSession(String username){
+    public UserSessionModel(String username){
         this.username = username;
     }
 

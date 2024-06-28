@@ -15,9 +15,6 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
-    // Getters and Setters
-
-    //Every getter function gets the values of the parameters when the class is instantiated
     public String getQuestion() {
         return questionText;
     }

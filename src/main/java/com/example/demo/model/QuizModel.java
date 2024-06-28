@@ -7,7 +7,7 @@ import java.util.List;
 
 @Component
 @SessionScope
-public class StudentQuiz {
+public class QuizModel {
 
     private List<Question> questions;
     private int score;
