@@ -11,7 +11,6 @@
     <ul>
         <li class="welcome">Welcome ${userSession.username}!</li>
         <li><a href="home">Home</a></li>
-<%--        <li><a href="quiz"><c:out value="${is_taken_msg}" /></a></li>--%>
         <li><a href="quiz">Take Quiz</a></li>
         <li><a href="viewGradesStudent">View Grades</a></li>
         <li><a class="active" href="logout">Logout</a></li>

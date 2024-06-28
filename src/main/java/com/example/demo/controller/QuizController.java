@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class QuizController {
@@ -30,9 +32,23 @@ public class QuizController {
     }
 
     @PostMapping("/submitQuiz")
-    public String submitQuiz(@RequestParam List<String> answers) {
+    public String submitQuiz(@RequestParam Map<String, String> params, Model model) {
+
+        List<String> answers = new ArrayList<>();
+        List<String> questions = new ArrayList<>();
+
+        // Extract answers and questions from params
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            if (entry.getKey().startsWith("answers[")) {
+                answers.add(entry.getValue());
+            } else if (entry.getKey().startsWith("questions[")) {
+                questions.add(entry.getValue());
+            }
+        }
         int score = quizService.calculateScore(quizModel.getQuestions(), answers);
         quizModel.setScore(score);
+        model.addAttribute("score", score);
+        model.addAttribute("questions", questions);
         return "submitQuiz";
     }
 
@@ -40,7 +56,7 @@ public class QuizController {
     public String showGrades(Model model) {
         model.addAttribute("score", quizModel.getScore());
         model.addAttribute("questions", quizModel.getQuestions());
-        return "grades";
+        return "viewStudentGrades";
     }
 
 }

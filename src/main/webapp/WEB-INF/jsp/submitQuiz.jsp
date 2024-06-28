@@ -11,6 +11,7 @@
 <h1>Your Score</h1>
 <p>You scored <span>${score}</span> out of <span>${questions.size()}</span>.</p>
 <a href="quiz">Take Quiz Again</a>
-
+<br>
+<a href="home">Back to Home</a>
 </body>
 </html>

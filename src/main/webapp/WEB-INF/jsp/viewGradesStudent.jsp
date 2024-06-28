@@ -8,9 +8,21 @@
 </head>
 <body>
 
-    <h1>Your Score</h1>
-    <p>You scored <span th:text="${score}"></span> out of <span th:text="${questions.size()}"></span>.</p>
-    <a href="/quiz">Take Quiz Again</a>
+<c:if test="${not empty userSession.username}">
+    <ul>
+        <li class="welcome">Welcome ${userSession.username}!</li>
+        <li><a href="home">Home</a></li>
+        <li><a href="quiz">Take Quiz</a></li>
+        <li><a href="viewGradesStudent">View Grades</a></li>
+        <li><a class="active" href="logout">Logout</a></li>
+    </ul>
+</c:if>
+
+<br>
+<br>
+
+    <h3>Student Grades</h3>
+    <h4>Grade on previous quiz: ${score}/${questions.size()}</h4>
 
 </body>
 </html>
