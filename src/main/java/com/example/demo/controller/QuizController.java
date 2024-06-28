@@ -24,15 +24,16 @@ public class QuizController {
     @GetMapping("/quiz")
     public String showQuiz(Model model) {
         List <Question> shuffledQuestions = quizService.getShuffledQuestions();
+        quizModel.setQuestions(shuffledQuestions);
         model.addAttribute("questions", shuffledQuestions);
         return "quiz";
     }
 
     @PostMapping("/submitQuiz")
-    public String submitQuiz(@RequestParam List<String> answers, Model model) {
+    public String submitQuiz(@RequestParam List<String> answers) {
         int score = quizService.calculateScore(quizModel.getQuestions(), answers);
         quizModel.setScore(score);
-        return "redirect:/grades";
+        return "submitQuiz";
     }
 
     @GetMapping("/grades")
