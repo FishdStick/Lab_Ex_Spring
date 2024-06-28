@@ -22,7 +22,7 @@
 <br>
 
     <h3>Student Grades</h3>
-    <h4>Grade on previous quiz: ${score}/${questions.size()}</h4>
+<%--    <h4>Grade on previous quiz: ${score}/${questions.size()}</h4>--%>
 
 </body>
 </html>
